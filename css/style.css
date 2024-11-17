@@ -5,4 +5,14 @@ body,html{
 
 }
 .airDeJeu{
+    height: 100%;
+}
+.saisiLettre{
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    padding-left: 1vh;
+}
+.pendu{
+    margin-left: 30vh;
+    margin-top: 40vh;
 }
