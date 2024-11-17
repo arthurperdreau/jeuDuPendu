@@ -20,34 +20,61 @@ function choixMotADeviner() {
 
 //fonction permettant d'afficher le mot sous forme de tirets
 function creationMotTiret(motADeviner) {
-    let longueurMot=motADeviner.length;
-    let motTiret="";
-    for (let i = 0; i < motADeviner.length; i++) {
-        motTiret+="_ " +""
+    let motTiret= motADeviner.split('');
+    for (let i = 0; i < motTiret.length; i ++) {
+        motTiret[i] = "_";
     }
     return motTiret;
 }
-// test fonction créationMotTiret alert(créationMotTiret(choixMotADeviner()));
-
-const valider = document.querySelector('.buttonValider');
-let mot=choixMotADeviner();
-let motTiret= creationMotTiret(mot)
-
-//fonction permettant le remplacement des lettres dans le mot composé de tiret
-function remplacementTiret(motEnCours,lettreSaisie,motFinalADeviner) {
-    for (let i=0; i<motEnCours.length; i++) {
-        if (lettreSaisie == motFinalADeviner[i] ) {
-            motEnCours.replace(motEnCours[i], lettreSaisie);
+function motTrouve(motEncours){
+    for (let i = 0; i < motEncours.length; i++) {
+        if (motEncours[i]==="_"){
+            return true;
         }
     }
-    console.log(motEnCours);
-    return motEnCours;
+
 }
+function lancerPartie(){
+    let motFinalADeviner=choixMotADeviner(); // --> ex: bateau
+    let vieDuJoueur=5; //--> initialisation du nombre de vie
+    let lettreSaisieParJoueur; //--> initialisation de la variable lettreSaisieParJoueur à none
+    let motTiret=creationMotTiret(motFinalADeviner); // --> ["_","_","_"]
+    let nbLettreTrouve=0;
+    while (vieDuJoueur > 0 && motTrouve){ //--> tant que le joueur a encore des vies et qu'il n'a pas trouvé le mot
+        lettreSaisieParJoueur=recuperationLettre();//--> actualisation de la variable lettreSaisieParJoueur avec une lettre
+        for (let i = 0; i < motFinalADeviner.length; i ++) {
+            if (lettreSaisieParJoueur.toLowerCase() === motFinalADeviner[i]) {
+                motTiret[i] = lettreSaisieParJoueur.toLowerCase();
+                nbLettreTrouve++;
+            }
+        }
+        if(nbLettreTrouve ===0) {
+            vieDuJoueur --; //--> décrémenter les vies si pas de lettre trouvée
+            console.log(vieDuJoueur);
+        }
+        else {
+            nbLettreTrouve = 0; //--> reset du nombre de lettre trouvée pour le prochain tour
+            console.log(nbLettreTrouve);
+        }
+        console.log(motTiret);
+    }
+    if (vieDuJoueur === 0) {
+        alert("Vous avez perdu !")
+            }else{
+        alert("Bravo tu a trouvé le mot")
+    }
+}
+lancerPartie();
 
-valider.addEventListener("click", remplacementTiret(motTiret,recuperationLettre(),mot));
+
+//const valider = document.querySelector('.buttonValider');
+//let mot=choixMotADeviner();
+//let motTiret= creationMotTiret(mot);
+//let motAtrouver=motTiret;
+//let lettreSaisie=recuperationLettre();
 
 
-
-
-
+//valider.addEventListener("click", remplacementTiret);
+//console.log(mot);
+//console.log(motAtrouver);
 
