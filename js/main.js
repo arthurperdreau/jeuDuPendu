@@ -1,7 +1,7 @@
 //fonction permettant de récupérer la lettre saisi par le joueur
-function récupérationLettre() {
+function recuperationLettre() {
     let lettre = document.getElementById("input").value;
-    alert(lettre);
+    //alert(lettre);
     return lettre;
 }
 
@@ -12,22 +12,42 @@ const listeMots = ['dragon', 'flemme', 'bleu', 'coder', 'manger', 'jouer', 'dorm
 
 //fonction permettant de choisir le mot à deviner parmis l'array listMots
 function choixMotADeviner() {
-    let nbHasard = Math.random()*alphabet.length;
+    let nbHasard = Math.random()*listeMots.length;
     let nbArrondi = Math.floor(nbHasard);
     let motADeviner = listeMots[nbArrondi];
     return motADeviner;
 }
 
-function créationMotTiret(motADeviner) {
+//fonction permettant d'afficher le mot sous forme de tirets
+function creationMotTiret(motADeviner) {
     let longueurMot=motADeviner.length;
     let motTiret="";
     for (let i = 0; i < motADeviner.length; i++) {
-        motTiret+="_ " +
-            ""
+        motTiret+="_ " +""
     }
     return motTiret;
 }
-// test fonction cr&tionMotTiret alert(créationMotTiret(choixMotADeviner()));
+// test fonction créationMotTiret alert(créationMotTiret(choixMotADeviner()));
+
+const valider = document.querySelector('.buttonValider');
+let mot=choixMotADeviner();
+let motTiret= creationMotTiret(mot)
+
+//fonction permettant le remplacement des lettres dans le mot composé de tiret
+function remplacementTiret(motEnCours,lettreSaisie,motFinalADeviner) {
+    for (let i=0; i<motEnCours.length; i++) {
+        if (lettreSaisie == motFinalADeviner[i] ) {
+            motEnCours.replace(motEnCours[i], lettreSaisie);
+        }
+    }
+    console.log(motEnCours);
+    return motEnCours;
+}
+
+valider.addEventListener("click", remplacementTiret(motTiret,recuperationLettre(),mot));
+
+
+
 
 
 
