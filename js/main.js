@@ -11,7 +11,7 @@ let vies=7;
 let motAtrouver= choixMotADeviner()
 let motTirets=creationMotTiret(motAtrouver)
 let lettresUtilisees=[];
-revelationPremiereEtDeuxiemeLettre()
+revelationPremiereEtDerniereLettre()
 valider.addEventListener("click",lancementJeu)
 
 
@@ -42,7 +42,7 @@ function creationMotTiret(motADeviner) {
     }
     return motTiret;
 }
-function revelationPremiereEtDeuxiemeLettre() {
+function revelationPremiereEtDerniereLettre() {
     let premiereEtDeuxiemeLettre=[motAtrouver[0],motAtrouver[motAtrouver.length-1]];
     for (let i = 0; i < 2; i ++) {
         for (let j = 0; j < motAtrouver.length; j ++) {
